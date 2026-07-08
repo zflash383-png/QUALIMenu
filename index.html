@@ -1023,7 +1023,7 @@
 <script>
     let currentRating = 0;
     const TELEGRAM_BOT_TOKEN = '8245227980:AAGEj8terDebLQJdz_xTUWcoRe-vlebi9UE';
-    const TELEGRAM_USER_ID = '1255936434'; // L'ID numérique du bot
+    const TELEGRAM_CHAT_ID = '8245227980'; // Ton ID Telegram
 
     function setRating(rating) {
         currentRating = rating;
@@ -1075,17 +1075,11 @@
 
         let sizeChoice = prompt(`Choisissez la taille:\n${sizeArray.map((s, i) => `${i + 1}. ${s} - ${priceArray[i]}`).join('\n')}`);
 
-        if (sizeChoice && sizeChoice > 0 && sizeChoice <= sizeArray.size) {
+        if (sizeChoice && sizeChoice > 0 && sizeChoice <= sizeArray.length) {
             const selectedSize = sizeArray[sizeChoice - 1];
             const selectedPrice = priceArray[sizeChoice - 1];
 
-            const message = `🛒 NOUVELLE COMMANDE QUALIMENU 🛒
-
-📦 Produit: ${productName}
-📏 Taille: ${selectedSize}
-💰 Prix: ${selectedPrice}
-
-Merci pour votre achat!`;
+            const message = `🛒 <b>NOUVELLE COMMANDE QUALIMENU</b> 🛒\n\n📦 <b>Produit:</b> ${productName}\n📏 <b>Taille:</b> ${selectedSize}\n💰 <b>Prix:</b> ${selectedPrice}\n\nMerci pour votre achat!`;
 
             // Envoyer via l'API Telegram Bot
             await sendTelegramMessage(message);
@@ -1102,17 +1096,19 @@ Merci pour votre achat!`;
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    chat_id: 'zz_inconnue',
+                    chat_id: TELEGRAM_CHAT_ID,
                     text: message,
                     parse_mode: 'HTML'
                 })
             });
 
-            if (response.ok) {
+            const data = await response.json();
+            
+            if (data.ok) {
                 showSuccessMessage('✅ Commande envoyée avec succès!');
             } else {
+                console.error('Erreur Telegram:', data);
                 showErrorMessage('❌ Erreur lors de l\'envoi');
-                console.log('Réponse:', await response.json());
             }
         } catch (error) {
             console.error('Erreur:', error);
