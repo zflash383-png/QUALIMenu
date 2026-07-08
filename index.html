@@ -810,6 +810,7 @@
             z-index: 3000;
             animation: slideIn 0.5s ease-out;
             box-shadow: 0 10px 30px rgba(0, 208, 132, 0.3);
+            font-weight: 600;
         }
 
         @keyframes slideIn {
@@ -824,6 +825,25 @@
         }
 
         .success-message.show {
+            display: block;
+        }
+
+        .error-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ff4757);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            z-index: 3000;
+            animation: slideIn 0.5s ease-out;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            font-weight: 600;
+        }
+
+        .error-message.show {
             display: block;
         }
     </style>
@@ -988,7 +1008,11 @@
     </div>
 
     <div class="success-message" id="successMessage">
-        ✅ Commande envoyée sur Telegram !
+        ✅ Commande envoyée avec succès !
+    </div>
+
+    <div class="error-message" id="errorMessage">
+        ❌ Erreur lors de l'envoi
     </div>
 
     <footer>
@@ -998,6 +1022,8 @@
 
 <script>
     let currentRating = 0;
+    const TELEGRAM_BOT_TOKEN = '8245227980:AAGEj8terDebLQJdz_xTUWcoRe-vlebi9UE';
+    const TELEGRAM_USER_ID = '1255936434'; // L'ID numérique du bot
 
     function setRating(rating) {
         currentRating = rating;
@@ -1043,31 +1069,54 @@
         showSuccessMessage('Avis publié avec succès!');
     }
 
-    function addToCart(productName, sizes, prices) {
+    async function addToCart(productName, sizes, prices) {
         const sizeArray = sizes.split('|');
         const priceArray = prices.split('|');
 
         let sizeChoice = prompt(`Choisissez la taille:\n${sizeArray.map((s, i) => `${i + 1}. ${s} - ${priceArray[i]}`).join('\n')}`);
 
-        if (sizeChoice && sizeChoice > 0 && sizeChoice <= sizeArray.length) {
+        if (sizeChoice && sizeChoice > 0 && sizeChoice <= sizeArray.size) {
             const selectedSize = sizeArray[sizeChoice - 1];
             const selectedPrice = priceArray[sizeChoice - 1];
 
-            const message = `
-🛒 NOUVELLE COMMANDE QUALIMENU 🛒
+            const message = `🛒 NOUVELLE COMMANDE QUALIMENU 🛒
 
 📦 Produit: ${productName}
 📏 Taille: ${selectedSize}
 💰 Prix: ${selectedPrice}
 
-Merci pour votre achat!
-            `.trim();
+Merci pour votre achat!`;
 
-            // Envoyer sur Telegram via le lien direct
-            const telegramUrl = `https://t.me/zz_inconnue?text=${encodeURIComponent(message)}`;
-            window.open(telegramUrl, '_blank');
+            // Envoyer via l'API Telegram Bot
+            await sendTelegramMessage(message);
+        }
+    }
 
-            showSuccessMessage('Ouverture Telegram...');
+    async function sendTelegramMessage(message) {
+        try {
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: 'zz_inconnue',
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            });
+
+            if (response.ok) {
+                showSuccessMessage('✅ Commande envoyée avec succès!');
+            } else {
+                showErrorMessage('❌ Erreur lors de l\'envoi');
+                console.log('Réponse:', await response.json());
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            showErrorMessage('❌ Erreur de connexion');
         }
     }
 
@@ -1118,6 +1167,16 @@ Merci pour votre achat!
 
     function showSuccessMessage(text) {
         const msg = document.getElementById('successMessage');
+        msg.textContent = text;
+        msg.classList.add('show');
+
+        setTimeout(() => {
+            msg.classList.remove('show');
+        }, 3000);
+    }
+
+    function showErrorMessage(text) {
+        const msg = document.getElementById('errorMessage');
         msg.textContent = text;
         msg.classList.add('show');
 
