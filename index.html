@@ -998,8 +998,6 @@
 
 <script>
     let currentRating = 0;
-    const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN'; // À configurer
-    const TELEGRAM_USER_ID = 'zz_inconnu'; // ID de conversation
 
     function setRating(rating) {
         currentRating = rating;
@@ -1065,36 +1063,12 @@
 Merci pour votre achat!
             `.trim();
 
-            // Envoyer sur Telegram
-            sendTelegramMessage(message);
+            // Envoyer sur Telegram via le lien direct
+            const telegramUrl = `https://t.me/zz_inconnue?text=${encodeURIComponent(message)}`;
+            window.open(telegramUrl, '_blank');
 
-            showSuccessMessage('Commande envoyée!');
+            showSuccessMessage('Ouverture Telegram...');
         }
-    }
-
-    function sendTelegramMessage(message) {
-        // Solution alternative: Utiliser un webhook ou une API personnalisée
-        // Voici un exemple avec Telegram Web API
-        console.log('Message à envoyer sur Telegram:', message);
-
-        // Vous pouvez utiliser un service comme:
-        // - Telegram Bot API
-        // - Webhook personnalisé
-        // - Service comme webhook.site
-
-        // Pour maintenant, on affiche le message dans la console
-        // et on peut l'améliorer plus tard
-        fetch('https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                chat_id: 'zz_inconnu',
-                text: message,
-                parse_mode: 'HTML'
-            })
-        }).catch(e => console.log('Utiliser un webhook pour Telegram'));
     }
 
     function openVideoModal(videoSource) {
