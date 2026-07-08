@@ -1,411 +1,780 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LAQUALIMENTON</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUALIMENU - Sélection Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+        body {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: white;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-body{
-    background:#070707;
-    color:white;
-}
+        /* Arrière-plan avec image */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('4089F810-3C22-460D-9E1E-36720CC8B78A.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-header{
-    text-align:center;
-    padding:35px 20px;
-    background:linear-gradient(145deg,#111,#000);
-}
+        /* Overlay sombre sur l'image */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(15, 15, 15, 0.92) 0%, rgba(26, 26, 26, 0.92) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
 
-.logo{
-    font-size:34px;
-    font-weight:900;
-    color:#ffd000;
-    letter-spacing:3px;
-}
+        main {
+            position: relative;
+            z-index: 1;
+        }
 
-.desc{
-    margin-top:10px;
-    color:#aaa;
-}
+        /* HEADER */
+        header {
+            text-align: center;
+            padding: 50px 20px 30px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 208, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.5s ease-out;
+        }
 
-.categories{
-    display:flex;
-    gap:12px;
-    padding:20px;
-    overflow:auto;
-}
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.categories button{
-    background:#171717;
-    color:#ffd000;
-    border:1px solid #ffd000;
-    border-radius:30px;
-    padding:12px 20px;
-    white-space:nowrap;
-    cursor:pointer;
-    transition:0.3s;
-}
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(255, 208, 0, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 40px rgba(255, 208, 0, 0.8);
+            }
+        }
 
-.categories button:hover{
-    background:#ffd000;
-    color:#000;
-}
+        .logo {
+            font-size: 44px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd000 0%, #ffed4e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            animation: glow 3s ease-in-out infinite;
+        }
 
-.container{
-    padding:20px;
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap:20px;
-}
+        .desc {
+            color: #aaa;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
 
-.card{
-    background:#111;
-    border-radius:22px;
-    overflow:hidden;
-    border:1px solid #222;
-    transition:transform 0.3s, box-shadow 0.3s;
-}
+        /* RÉSEAUX SOCIAUX */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 208, 0, 0.1);
+        }
 
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 10px 30px rgba(255,208,0,0.2);
-}
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 208, 0, 0.1);
+            color: #ffd000;
+            border: 1.5px solid #ffd000;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+        }
 
-.media-container{
-    position:relative;
-    width:100%;
-    height:220px;
-    background:#000;
-}
+        .social-btn:hover {
+            background: #ffd000;
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 208, 0, 0.4);
+        }
 
-.card video{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
+        /* CATEGORIES */
+        .categories {
+            display: flex;
+            gap: 10px;
+            padding: 20px;
+            overflow-x: auto;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 208, 0, 0.1);
+            scrollbar-width: thin;
+            animation: slideUp 0.5s ease-out 0.2s both;
+        }
 
-.video-play-icon{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    width:60px;
-    height:60px;
-    background:rgba(255,208,0,0.9);
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    transition:0.3s;
-    z-index:10;
-}
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.video-play-icon:hover{
-    background:#ffd000;
-    transform:translate(-50%, -50%) scale(1.1);
-}
+        .categories::-webkit-scrollbar {
+            height: 6px;
+        }
 
-.video-play-icon::after{
-    content:'▶';
-    color:#000;
-    font-size:24px;
-    margin-left:4px;
-}
+        .categories::-webkit-scrollbar-track {
+            background: rgba(255, 208, 0, 0.1);
+            border-radius: 10px;
+        }
 
-.info{
-    padding:20px;
-}
+        .categories::-webkit-scrollbar-thumb {
+            background: #ffd000;
+            border-radius: 10px;
+        }
 
-.info h2{
-    color:#ffd000;
-    margin-bottom:10px;
-    font-size:20px;
-}
+        .categories button {
+            background: rgba(255, 208, 0, 0.05);
+            color: #ffd000;
+            border: 1.5px solid #ffd000;
+            border-radius: 25px;
+            padding: 10px 24px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-.info p{
-    color:#aaa;
-    font-size:14px;
-    margin-bottom:15px;
-}
+        .categories button:hover {
+            background: #ffd000;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 208, 0, 0.3);
+        }
 
-.price-container{
-    background:#1a1a1a;
-    padding:15px;
-    border-radius:12px;
-    margin:15px 0;
-}
+        .categories button:active {
+            background: #ffed4e;
+            transform: scale(0.98);
+        }
 
-.price-option{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:8px 0;
-    padding:8px 0;
-    border-bottom:1px solid #222;
-}
+        /* CONTAINER */
+        .container {
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-.price-option:last-child{
-    border-bottom:none;
-}
+        /* CARDS */
+        .card {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1.5px solid rgba(255, 208, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.5s ease-out;
+            position: relative;
+        }
 
-.price-option span:first-child{
-    color:#aaa;
-    font-size:13px;
-}
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 208, 0, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-.price-option span:last-child{
-    color:#ffd000;
-    font-weight:bold;
-    font-size:16px;
-}
+        .card:hover::before {
+            opacity: 1;
+        }
 
-.button{
-    margin-top:15px;
-    width:100%;
-    padding:13px;
-    border:none;
-    border-radius:15px;
-    background:#ffd000;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-    color:#000;
-}
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.button:hover{
-    background:#ffed4e;
-    transform:scale(1.02);
-}
+        .card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(255, 208, 0, 0.5);
+            box-shadow: 0 30px 60px rgba(255, 208, 0, 0.25), 0 0 80px rgba(255, 208, 0, 0.15);
+            background: rgba(28, 28, 28, 0.95);
+        }
 
-/* Modal pour les vidéos */
-.modal{
-    display:none;
-    position:fixed;
-    z-index:1000;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.95);
-}
+        .media-container {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            overflow: hidden;
+        }
 
-.modal.active{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
+        .media-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: 2;
+        }
 
-.modal-content{
-    position:relative;
-    background:#000;
-    border-radius:15px;
-    width:90%;
-    max-width:900px;
-    aspect-ratio: 16/9;
-}
+        .card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-.close-modal{
-    position:absolute;
-    top:15px;
-    right:15px;
-    font-size:28px;
-    font-weight:bold;
-    color:#ffd000;
-    cursor:pointer;
-    background:rgba(0,0,0,0.7);
-    border:none;
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    z-index:1001;
-}
+        .card:hover video {
+            transform: scale(1.08);
+        }
 
-.close-modal:hover{
-    color:#fff;
-    background:rgba(0,0,0,0.9);
-}
+        .video-play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 208, 0, 0.85);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 3;
+            box-shadow: 0 15px 40px rgba(255, 208, 0, 0.35), inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s ease-in-out infinite;
+        }
 
-.modal-content video{
-    width:100%;
-    height:100%;
-    border-radius:15px;
-}
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 15px 40px rgba(255, 208, 0, 0.35), inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 20px 50px rgba(255, 208, 0, 0.5), inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+            }
+        }
 
-footer{
-    text-align:center;
-    padding:30px;
-    color:#666;
-    margin-top:40px;
-}
+        .card:hover .video-play-icon {
+            background: #ffd000;
+            transform: translate(-50%, -50%) scale(1.2);
+            box-shadow: 0 20px 50px rgba(255, 208, 0, 0.5), inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+            animation: none;
+        }
 
-</style>
+        .video-play-icon::after {
+            content: '▶';
+            color: #000;
+            font-size: 32px;
+            margin-left: 4px;
+            font-weight: 900;
+        }
+
+        /* INFO */
+        .info {
+            padding: 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .info h2 {
+            color: #ffd000;
+            margin-bottom: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .info p {
+            color: #bbb;
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .price-container {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.8) 0%, rgba(20, 20, 20, 0.8) 100%);
+            backdrop-filter: blur(10px);
+            padding: 18px;
+            border-radius: 16px;
+            margin: 18px 0;
+            border: 1.5px solid rgba(255, 208, 0, 0.12);
+        }
+
+        .price-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 11px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 208, 0, 0.08);
+            transition: all 0.3s ease-out;
+        }
+
+        .price-option:hover {
+            padding-left: 5px;
+            border-bottom-color: rgba(255, 208, 0, 0.15);
+        }
+
+        .price-option:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .price-option span:first-child {
+            color: #999;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .price-option span:last-child {
+            color: #ffd000;
+            font-weight: 800;
+            font-size: 17px;
+        }
+
+        /* BUTTON */
+        .button {
+            margin-top: 18px;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #ffd000 0%, #ffed4e 100%);
+            font-weight: 800;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(255, 208, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.4s ease-out;
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 208, 0, 0.4);
+            background: linear-gradient(135deg, #ffed4e 0%, #ffd000 100%);
+        }
+
+        .button:active {
+            transform: scale(0.97);
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            position: relative;
+            background: #000;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            border: 2px solid rgba(255, 208, 0, 0.3);
+            box-shadow: 0 0 100px rgba(255, 208, 0, 0.3);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 36px;
+            font-weight: bold;
+            color: #ffd000;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(255, 208, 0, 0.4);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            z-index: 2001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease-out;
+        }
+
+        .close-modal:hover {
+            color: #fff;
+            background: rgba(255, 208, 0, 0.2);
+            border-color: #ffd000;
+            transform: scale(1.15);
+            box-shadow: 0 0 30px rgba(255, 208, 0, 0.4);
+        }
+
+        .modal-content video {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+            margin-top: 80px;
+            border-top: 2px solid rgba(255, 208, 0, 0.15);
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            animation: slideUp 0.5s ease-out 0.4s both;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 32px;
+            }
+
+            .container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+                padding: 25px 15px;
+            }
+
+            .card {
+                border-radius: 18px;
+            }
+
+            .media-container {
+                height: 220px;
+            }
+
+            .info {
+                padding: 20px;
+            }
+
+            .info h2 {
+                font-size: 20px;
+            }
+
+            .modal-content {
+                width: 95%;
+                border-radius: 16px;
+            }
+
+            .social-links {
+                gap: 10px;
+            }
+
+            .social-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+
+        /* SCROLLBAR GLOBAL */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 208, 0, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 208, 0, 0.3);
+            border-radius: 10px;
+            transition: background 0.3s ease-out;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffd000;
+        }
+
+        /* PARTICLES EFFECT */
+        @keyframes particle-float {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(20px);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 
-
 <body>
+<main>
+    <header>
+        <div class="logo">QUALIMENU</div>
+        <div class="desc">✨ Sélection Premium • Menton 🍋</div>
+        <div class="social-links">
+            <a href="https://www.snapchat.com/add/laqualimenton06" class="social-btn" target="_blank">
+                <span>📸</span> Snapchat
+            </a>
+            <a href="https://www.instagram.com/laqualimenton065" class="social-btn" target="_blank">
+                <span>📷</span> Instagram
+            </a>
+        </div>
+    </header>
 
-<header>
-<div class="logo">LAQUALIMENTON</div>
-<div class="desc">Sélection premium • Menton 🍋</div>
-</header>
+    <div class="categories">
+        <button onclick="filterCategory('tous')">Tous</button>
+        <button onclick="filterCategory('collections')">Collections</button>
+        <button onclick="filterCategory('nouveautes')">Nouveautés</button>
+        <button onclick="filterCategory('selection')">Sélection</button>
+    </div>
 
+    <div class="container" id="container">
+        <!-- PRODUIT 1 - Jaune mousseux caligate -->
+        <div class="card" data-category="collections">
+            <div class="media-container">
+                <video onclick="openVideoModal('IMG_0062.MOV')">
+                    <source src="IMG_0062.MOV" type="video/quicktime">
+                    Votre navigateur ne supporte pas la vidéo HTML5.
+                </video>
+                <div class="video-play-icon" onclick="openVideoModal('IMG_0062.MOV')"></div>
+            </div>
 
-<div class="categories">
-<button onclick="filterCategory('tous')">Tous</button>
-<button onclick="filterCategory('collections')">Collections</button>
-<button onclick="filterCategory('nouveautes')">Nouveautés</button>
-<button onclick="filterCategory('selection')">Sélection</button>
-</div>
+            <div class="info">
+                <h2>Jaune Mousseux Caligate</h2>
+                <p>Jaune très mousseux fait des effets magic 👽</p>
 
+                <div class="price-container">
+                    <div class="price-option">
+                        <span>10g</span>
+                        <span>50€</span>
+                    </div>
+                    <div class="price-option">
+                        <span>25g</span>
+                        <span>100€</span>
+                    </div>
+                    <div class="price-option">
+                        <span>50g</span>
+                        <span>180€</span>
+                    </div>
+                    <div class="price-option">
+                        <span>100g</span>
+                        <span>300€</span>
+                    </div>
+                </div>
 
-<div class="container" id="container">
+                <button class="button">Ajouter au panier</button>
+            </div>
+        </div>
 
+        <!-- PRODUIT 2 - Filtre Tomjerry -->
+        <div class="card" data-category="nouveautes">
+            <div class="media-container">
+                <video onclick="openVideoModal('IMG_0063.MOV')">
+                    <source src="IMG_0063.MOV" type="video/quicktime">
+                    Votre navigateur ne supporte pas la vidéo HTML5.
+                </video>
+                <div class="video-play-icon" onclick="openVideoModal('IMG_0063.MOV')"></div>
+            </div>
 
-<!-- PRODUIT 1 - Jaune mousseux caligate -->
-<div class="card" data-category="collections">
-<div class="media-container">
-<video onclick="openVideoModal('IMG_0062.MOV')">
-<source src="IMG_0062.MOV" type="video/quicktime">
-Votre navigateur ne supporte pas la vidéo HTML5.
-</video>
-<div class="video-play-icon" onclick="openVideoModal('IMG_0062.MOV')"></div>
-</div>
+            <div class="info">
+                <h2>Filtre Tomjerry</h2>
+                <p>Filtre goût fort très bon fait rêver 🥶</p>
 
-<div class="info">
-<h2>Jaune mousseux caligate</h2>
-<p>Jaune très mousseux fait des effets magic 👽</p>
+                <div class="price-container">
+                    <div class="price-option">
+                        <span>6g</span>
+                        <span>50€</span>
+                    </div>
+                    <div class="price-option">
+                        <span>25g</span>
+                        <span>180€</span>
+                    </div>
+                    <div class="price-option">
+                        <span>50g</span>
+                        <span>300€</span>
+                    </div>
+                </div>
 
-<div class="price-container">
-<div class="price-option">
-<span>10g</span>
-<span>50€</span>
-</div>
-<div class="price-option">
-<span>25g</span>
-<span>100€</span>
-</div>
-<div class="price-option">
-<span>50g</span>
-<span>180€</span>
-</div>
-<div class="price-option">
-<span>100g</span>
-<span>300€</span>
-</div>
-</div>
+                <button class="button">Ajouter au panier</button>
+            </div>
+        </div>
+    </div>
 
-<button class="button">Ajouter au panier</button>
-</div>
+    <!-- Modal pour afficher les vidéos -->
+    <div id="videoModal" class="modal">
+        <button class="close-modal" onclick="closeVideoModal()">&times;</button>
+        <div class="modal-content">
+            <video id="videoPlayer" controls autoplay>
+                <source id="videoSource" src="" type="video/quicktime">
+                Votre navigateur ne supporte pas la vidéo HTML5.
+            </video>
+        </div>
+    </div>
 
-</div>
-
-
-<!-- PRODUIT 2 - Filtre Tomjerry -->
-<div class="card" data-category="nouveautes">
-<div class="media-container">
-<video onclick="openVideoModal('IMG_0063.MOV')">
-<source src="IMG_0063.MOV" type="video/quicktime">
-Votre navigateur ne supporte pas la vidéo HTML5.
-</video>
-<div class="video-play-icon" onclick="openVideoModal('IMG_0063.MOV')"></div>
-</div>
-
-<div class="info">
-<h2>Filtre Tomjerry</h2>
-<p>Filtre goût fort très bon fait rêver 🥶</p>
-
-<div class="price-container">
-<div class="price-option">
-<span>6g</span>
-<span>50€</span>
-</div>
-<div class="price-option">
-<span>25g</span>
-<span>180€</span>
-</div>
-<div class="price-option">
-<span>50g</span>
-<span>300€</span>
-</div>
-</div>
-
-<button class="button">Ajouter au panier</button>
-</div>
-
-</div>
-
-
-</div>
-
-
-<!-- Modal pour afficher les vidéos -->
-<div id="videoModal" class="modal">
-<button class="close-modal" onclick="closeVideoModal()">&times;</button>
-<div class="modal-content">
-<video id="videoPlayer" controls autoplay>
-<source id="videoSource" src="" type="video/quicktime">
-Votre navigateur ne supporte pas la vidéo HTML5.
-</video>
-</div>
-</div>
-
-
-<footer>
-© 2026 LAQUALIMENTON
-</footer>
-
+    <footer>
+        © 2026 QUALIMENU • Premium Selection
+    </footer>
+</main>
 
 <script>
-function openVideoModal(videoSource) {
-    const modal = document.getElementById('videoModal');
-    const videoPlayer = document.getElementById('videoPlayer');
-    const videoSource_elem = document.getElementById('videoSource');
-    
-    videoSource_elem.src = videoSource;
-    videoPlayer.load();
-    
-    modal.classList.add('active');
-}
+    function openVideoModal(videoSource) {
+        const modal = document.getElementById('videoModal');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoSource_elem = document.getElementById('videoSource');
 
-function closeVideoModal() {
-    const modal = document.getElementById('videoModal');
-    const videoPlayer = document.getElementById('videoPlayer');
-    
-    videoPlayer.pause();
-    modal.classList.remove('active');
-}
+        videoSource_elem.src = videoSource;
+        videoPlayer.load();
 
-// Fermer le modal en cliquant en dehors
-window.onclick = function(event) {
-    const modal = document.getElementById('videoModal');
-    if (event.target == modal) {
-        closeVideoModal();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
-}
 
-// Filtrer par catégorie
-function filterCategory(category) {
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        if (category === 'tous' || card.getAttribute('data-category') === category) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
+    function closeVideoModal() {
+        const modal = document.getElementById('videoModal');
+        const videoPlayer = document.getElementById('videoPlayer');
+
+        videoPlayer.pause();
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    // Fermer le modal en cliquant en dehors
+    window.onclick = function(event) {
+        const modal = document.getElementById('videoModal');
+        if (event.target == modal) {
+            closeVideoModal();
+        }
+    }
+
+    // Fermer avec la touche Escape
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeVideoModal();
         }
     });
-}
 
+    // Filtrer par catégorie
+    function filterCategory(category) {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            if (category === 'tous' || card.getAttribute('data-category') === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
 </script>
-
 </body>
 </html>
