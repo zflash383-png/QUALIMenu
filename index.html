@@ -50,11 +50,19 @@ header{
     border-radius:30px;
     padding:12px 20px;
     white-space:nowrap;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.categories button:hover{
+    background:#ffd000;
+    color:#000;
 }
 
 .container{
     padding:20px;
     display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap:20px;
 }
 
@@ -63,12 +71,55 @@ header{
     border-radius:22px;
     overflow:hidden;
     border:1px solid #222;
+    transition:transform 0.3s, box-shadow 0.3s;
 }
 
-.card img{
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 30px rgba(255,208,0,0.2);
+}
+
+.media-container{
+    position:relative;
     width:100%;
     height:220px;
+    background:#000;
+}
+
+.card video{
+    width:100%;
+    height:100%;
     object-fit:cover;
+    display:block;
+}
+
+.video-play-icon{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:60px;
+    height:60px;
+    background:rgba(255,208,0,0.9);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:0.3s;
+    z-index:10;
+}
+
+.video-play-icon:hover{
+    background:#ffd000;
+    transform:translate(-50%, -50%) scale(1.1);
+}
+
+.video-play-icon::after{
+    content:'▶';
+    color:#000;
+    font-size:24px;
+    margin-left:4px;
 }
 
 .info{
@@ -78,10 +129,44 @@ header{
 .info h2{
     color:#ffd000;
     margin-bottom:10px;
+    font-size:20px;
 }
 
 .info p{
     color:#aaa;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.price-container{
+    background:#1a1a1a;
+    padding:15px;
+    border-radius:12px;
+    margin:15px 0;
+}
+
+.price-option{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:8px 0;
+    padding:8px 0;
+    border-bottom:1px solid #222;
+}
+
+.price-option:last-child{
+    border-bottom:none;
+}
+
+.price-option span:first-child{
+    color:#aaa;
+    font-size:13px;
+}
+
+.price-option span:last-child{
+    color:#ffd000;
+    font-weight:bold;
+    font-size:16px;
 }
 
 .button{
@@ -92,12 +177,75 @@ header{
     border-radius:15px;
     background:#ffd000;
     font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    color:#000;
+}
+
+.button:hover{
+    background:#ffed4e;
+    transform:scale(1.02);
+}
+
+/* Modal pour les vidéos */
+.modal{
+    display:none;
+    position:fixed;
+    z-index:1000;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.95);
+}
+
+.modal.active{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-content{
+    position:relative;
+    background:#000;
+    border-radius:15px;
+    width:90%;
+    max-width:900px;
+    aspect-ratio: 16/9;
+}
+
+.close-modal{
+    position:absolute;
+    top:15px;
+    right:15px;
+    font-size:28px;
+    font-weight:bold;
+    color:#ffd000;
+    cursor:pointer;
+    background:rgba(0,0,0,0.7);
+    border:none;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    z-index:1001;
+}
+
+.close-modal:hover{
+    color:#fff;
+    background:rgba(0,0,0,0.9);
+}
+
+.modal-content video{
+    width:100%;
+    height:100%;
+    border-radius:15px;
 }
 
 footer{
     text-align:center;
     padding:30px;
     color:#666;
+    margin-top:40px;
 }
 
 </style>
@@ -113,40 +261,102 @@ footer{
 
 
 <div class="categories">
-<button>Collection</button>
-<button>Nouveautés</button>
-<button>Sélection</button>
+<button onclick="filterCategory('tous')">Tous</button>
+<button onclick="filterCategory('collections')">Collections</button>
+<button onclick="filterCategory('nouveautes')">Nouveautés</button>
+<button onclick="filterCategory('selection')">Sélection</button>
 </div>
 
 
-<div class="container">
+<div class="container" id="container">
 
 
-<div class="card">
-<img src="photo1.jpg">
+<!-- PRODUIT 1 - Jaune mousseux caligate -->
+<div class="card" data-category="collections">
+<div class="media-container">
+<video onclick="openVideoModal('IMG_0062.MOV')">
+<source src="IMG_0062.MOV" type="video/quicktime">
+Votre navigateur ne supporte pas la vidéo HTML5.
+</video>
+<div class="video-play-icon" onclick="openVideoModal('IMG_0062.MOV')"></div>
+</div>
 
 <div class="info">
-<h2>Produit 1</h2>
-<p>Description du produit</p>
-<button class="button">Voir détails</button>
+<h2>Jaune mousseux caligate</h2>
+<p>Jaune très mousseux fait des effets magic 👽</p>
+
+<div class="price-container">
+<div class="price-option">
+<span>10g</span>
+<span>50€</span>
+</div>
+<div class="price-option">
+<span>25g</span>
+<span>100€</span>
+</div>
+<div class="price-option">
+<span>50g</span>
+<span>180€</span>
+</div>
+<div class="price-option">
+<span>100g</span>
+<span>300€</span>
+</div>
+</div>
+
+<button class="button">Ajouter au panier</button>
 </div>
 
 </div>
 
 
-
-<div class="card">
-<img src="photo2.jpg">
+<!-- PRODUIT 2 - Filtre Tomjerry -->
+<div class="card" data-category="nouveautes">
+<div class="media-container">
+<video onclick="openVideoModal('IMG_0063.MOV')">
+<source src="IMG_0063.MOV" type="video/quicktime">
+Votre navigateur ne supporte pas la vidéo HTML5.
+</video>
+<div class="video-play-icon" onclick="openVideoModal('IMG_0063.MOV')"></div>
+</div>
 
 <div class="info">
-<h2>Produit 2</h2>
-<p>Description du produit</p>
-<button class="button">Voir détails</button>
+<h2>Filtre Tomjerry</h2>
+<p>Filtre goût fort très bon fait rêver 🥶</p>
+
+<div class="price-container">
+<div class="price-option">
+<span>6g</span>
+<span>50€</span>
+</div>
+<div class="price-option">
+<span>25g</span>
+<span>180€</span>
+</div>
+<div class="price-option">
+<span>50g</span>
+<span>300€</span>
+</div>
+</div>
+
+<button class="button">Ajouter au panier</button>
 </div>
 
 </div>
 
 
+</div>
+
+
+<!-- Modal pour afficher les vidéos -->
+<div id="videoModal" class="modal">
+<button class="close-modal" onclick="closeVideoModal()">&times;</button>
+<div class="modal-content">
+<video id="videoPlayer" controls autoplay>
+<source id="videoSource" src="" type="video/quicktime">
+Votre navigateur ne supporte pas la vidéo HTML5.
+</video>
+</div>
 </div>
 
 
@@ -154,6 +364,48 @@ footer{
 © 2026 LAQUALIMENTON
 </footer>
 
+
+<script>
+function openVideoModal(videoSource) {
+    const modal = document.getElementById('videoModal');
+    const videoPlayer = document.getElementById('videoPlayer');
+    const videoSource_elem = document.getElementById('videoSource');
+    
+    videoSource_elem.src = videoSource;
+    videoPlayer.load();
+    
+    modal.classList.add('active');
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const videoPlayer = document.getElementById('videoPlayer');
+    
+    videoPlayer.pause();
+    modal.classList.remove('active');
+}
+
+// Fermer le modal en cliquant en dehors
+window.onclick = function(event) {
+    const modal = document.getElementById('videoModal');
+    if (event.target == modal) {
+        closeVideoModal();
+    }
+}
+
+// Filtrer par catégorie
+function filterCategory(category) {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        if (category === 'tous' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+</script>
 
 </body>
 </html>
