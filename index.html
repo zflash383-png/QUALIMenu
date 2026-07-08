@@ -58,10 +58,11 @@
         /* HEADER */
         header {
             text-align: center;
-            padding: 50px 20px 30px;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+            padding: 30px 20px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 100%);
             backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(255, 208, 0, 0.2);
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #ffd000, #ff6b6b, #4ecdc4, #ffd000) 1;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -81,23 +82,47 @@
 
         @keyframes glow {
             0%, 100% {
-                text-shadow: 0 0 20px rgba(255, 208, 0, 0.5);
+                text-shadow: 0 0 20px rgba(255, 208, 0, 0.5), 0 0 30px rgba(255, 107, 107, 0.3);
             }
             50% {
-                text-shadow: 0 0 40px rgba(255, 208, 0, 0.8);
+                text-shadow: 0 0 40px rgba(255, 208, 0, 0.8), 0 0 50px rgba(255, 107, 107, 0.5);
             }
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #ffd000;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(255, 208, 0, 0.6);
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .logo {
             font-size: 44px;
             font-weight: 900;
-            background: linear-gradient(135deg, #ffd000 0%, #ffed4e 100%);
+            background: linear-gradient(135deg, #ffd000 0%, #ff6b6b 50%, #4ecdc4 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 0;
             animation: glow 3s ease-in-out infinite;
         }
 
@@ -107,7 +132,12 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 600;
+            margin-top: 10px;
             margin-bottom: 20px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #ffd000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* RÉSEAUX SOCIAUX */
@@ -117,18 +147,20 @@
             justify-content: center;
             flex-wrap: wrap;
             padding-top: 15px;
-            border-top: 1px solid rgba(255, 208, 0, 0.1);
+            border-top: 2px solid;
+            border-image: linear-gradient(90deg, transparent, #ff6b6b, #4ecdc4, transparent) 1;
         }
 
         .social-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 208, 0, 0.1);
+            background: linear-gradient(135deg, rgba(255, 208, 0, 0.1), rgba(255, 107, 107, 0.1));
             color: #ffd000;
-            border: 1.5px solid #ffd000;
-            border-radius: 20px;
-            padding: 8px 16px;
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #ffd000, #ff6b6b) 1;
+            border-radius: 25px;
+            padding: 10px 18px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 13px;
@@ -139,7 +171,7 @@
         }
 
         .social-btn:hover {
-            background: #ffd000;
+            background: linear-gradient(135deg, #ffd000, #ff6b6b);
             color: #000;
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(255, 208, 0, 0.4);
@@ -153,9 +185,9 @@
             overflow-x: auto;
             justify-content: center;
             flex-wrap: wrap;
-            background: rgba(0, 0, 0, 0.3);
+            background: linear-gradient(90deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 208, 0, 0.1);
+            border-bottom: 2px solid rgba(255, 208, 0, 0.2);
             scrollbar-width: thin;
             animation: slideUp 0.5s ease-out 0.2s both;
         }
@@ -181,14 +213,14 @@
         }
 
         .categories::-webkit-scrollbar-thumb {
-            background: #ffd000;
+            background: linear-gradient(180deg, #ffd000, #ff6b6b);
             border-radius: 10px;
         }
 
         .categories button {
-            background: rgba(255, 208, 0, 0.05);
+            background: linear-gradient(135deg, rgba(255, 208, 0, 0.05), rgba(255, 107, 107, 0.05));
             color: #ffd000;
-            border: 1.5px solid #ffd000;
+            border: 2px solid #ffd000;
             border-radius: 25px;
             padding: 10px 24px;
             white-space: nowrap;
@@ -201,7 +233,7 @@
         }
 
         .categories button:hover {
-            background: #ffd000;
+            background: linear-gradient(135deg, #ffd000, #ff6b6b);
             color: #000;
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(255, 208, 0, 0.3);
@@ -228,7 +260,8 @@
             backdrop-filter: blur(15px);
             border-radius: 24px;
             overflow: hidden;
-            border: 1.5px solid rgba(255, 208, 0, 0.15);
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #ffd000, #ff6b6b, #4ecdc4) 1;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             animation: fadeInUp 0.5s ease-out;
             position: relative;
@@ -238,7 +271,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255, 208, 0, 0.1) 0%, transparent 50%);
+            background: linear-gradient(135deg, rgba(255, 208, 0, 0.2) 0%, rgba(255, 107, 107, 0.1) 50%, transparent 100%);
             opacity: 0;
             transition: opacity 0.4s ease-out;
             pointer-events: none;
@@ -262,8 +295,7 @@
 
         .card:hover {
             transform: translateY(-12px);
-            border-color: rgba(255, 208, 0, 0.5);
-            box-shadow: 0 30px 60px rgba(255, 208, 0, 0.25), 0 0 80px rgba(255, 208, 0, 0.15);
+            box-shadow: 0 30px 60px rgba(255, 208, 0, 0.3), 0 0 80px rgba(255, 107, 107, 0.25);
             background: rgba(28, 28, 28, 0.95);
         }
 
@@ -271,7 +303,7 @@
             position: relative;
             width: 100%;
             height: 260px;
-            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
             overflow: hidden;
         }
 
@@ -302,7 +334,7 @@
             transform: translate(-50%, -50%);
             width: 80px;
             height: 80px;
-            background: rgba(255, 208, 0, 0.85);
+            background: linear-gradient(135deg, #ffd000, #ff6b6b);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -324,9 +356,9 @@
         }
 
         .card:hover .video-play-icon {
-            background: #ffd000;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
             transform: translate(-50%, -50%) scale(1.2);
-            box-shadow: 0 20px 50px rgba(255, 208, 0, 0.5), inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 50px rgba(255, 107, 107, 0.5), inset 0 -2px 5px rgba(0, 0, 0, 0.2);
             animation: none;
         }
 
@@ -346,7 +378,10 @@
         }
 
         .info h2 {
-            color: #ffd000;
+            background: linear-gradient(135deg, #ffd000, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 12px;
             font-size: 24px;
             font-weight: 800;
@@ -367,7 +402,8 @@
             padding: 18px;
             border-radius: 16px;
             margin: 18px 0;
-            border: 1.5px solid rgba(255, 208, 0, 0.12);
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #ffd000, #ff6b6b) 1;
         }
 
         .price-option {
@@ -382,7 +418,7 @@
 
         .price-option:hover {
             padding-left: 5px;
-            border-bottom-color: rgba(255, 208, 0, 0.15);
+            border-bottom-color: rgba(255, 107, 107, 0.15);
         }
 
         .price-option:last-child {
@@ -397,7 +433,10 @@
         }
 
         .price-option span:last-child {
-            color: #ffd000;
+            background: linear-gradient(135deg, #ffd000, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: 800;
             font-size: 17px;
         }
@@ -409,7 +448,7 @@
             padding: 16px;
             border: none;
             border-radius: 14px;
-            background: linear-gradient(135deg, #ffd000 0%, #ffed4e 100%);
+            background: linear-gradient(135deg, #ffd000 0%, #ff6b6b 50%, #4ecdc4 100%);
             font-weight: 800;
             font-size: 15px;
             cursor: pointer;
@@ -439,8 +478,7 @@
 
         .button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 208, 0, 0.4);
-            background: linear-gradient(135deg, #ffed4e 0%, #ffd000 100%);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
         }
 
         .button:active {
@@ -483,7 +521,8 @@
             width: 90%;
             max-width: 900px;
             aspect-ratio: 16 / 9;
-            border: 2px solid rgba(255, 208, 0, 0.3);
+            border: 3px solid;
+            border-image: linear-gradient(135deg, #ffd000, #ff6b6b, #4ecdc4) 1;
             box-shadow: 0 0 100px rgba(255, 208, 0, 0.3);
             animation: slideUp 0.3s ease-out;
         }
@@ -497,7 +536,8 @@
             color: #ffd000;
             cursor: pointer;
             background: rgba(0, 0, 0, 0.8);
-            border: 2px solid rgba(255, 208, 0, 0.4);
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #ffd000, #ff6b6b) 1;
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -511,7 +551,6 @@
         .close-modal:hover {
             color: #fff;
             background: rgba(255, 208, 0, 0.2);
-            border-color: #ffd000;
             transform: scale(1.15);
             box-shadow: 0 0 30px rgba(255, 208, 0, 0.4);
         }
@@ -522,13 +561,162 @@
             border-radius: 20px;
         }
 
+        /* AVIS SECTION */
+        .reviews-section {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .reviews-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #ffd000, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .review-form {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #ffd000, #ff6b6b) 1;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffd000;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(255, 208, 0, 0.2);
+            border-radius: 10px;
+            background: rgba(30, 30, 30, 0.8);
+            color: #fff;
+            font-family: inherit;
+            transition: all 0.3s ease-out;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ffd000;
+            box-shadow: 0 0 20px rgba(255, 208, 0, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .rating {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .star {
+            font-size: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease-out;
+            color: rgba(255, 208, 0, 0.3);
+        }
+
+        .star:hover,
+        .star.active {
+            color: #ffd000;
+            transform: scale(1.2);
+            text-shadow: 0 0 10px rgba(255, 208, 0, 0.5);
+        }
+
+        .submit-review {
+            background: linear-gradient(135deg, #ffd000, #ff6b6b, #4ecdc4);
+            color: #000;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease-out;
+            font-size: 14px;
+            letter-spacing: 1px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-review:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 208, 0, 0.3);
+        }
+
+        .reviews-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .review-item {
+            background: rgba(20, 20, 20, 0.6);
+            border-left: 4px solid;
+            border-image: linear-gradient(180deg, #ffd000, #ff6b6b) 1;
+            padding: 20px;
+            border-radius: 10px;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+
+        .review-name {
+            color: #4ecdc4;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .review-rating {
+            color: #ffd000;
+            font-size: 14px;
+        }
+
+        .review-text {
+            color: #ccc;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
         /* FOOTER */
         footer {
             text-align: center;
             padding: 50px 20px;
             color: #666;
             margin-top: 80px;
-            border-top: 2px solid rgba(255, 208, 0, 0.15);
+            border-top: 2px solid;
+            border-image: linear-gradient(90deg, transparent, #ff6b6b, #4ecdc4, transparent) 1;
             font-size: 12px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -539,6 +727,11 @@
         @media (max-width: 768px) {
             .logo {
                 font-size: 32px;
+            }
+
+            .logo-img {
+                width: 40px;
+                height: 40px;
             }
 
             .container {
@@ -576,6 +769,14 @@
                 padding: 8px 14px;
                 font-size: 12px;
             }
+
+            .reviews-title {
+                font-size: 28px;
+            }
+
+            .review-form {
+                padding: 20px;
+            }
         }
 
         /* SCROLLBAR GLOBAL */
@@ -588,31 +789,42 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 208, 0, 0.3);
+            background: linear-gradient(180deg, #ffd000, #ff6b6b);
             border-radius: 10px;
             transition: background 0.3s ease-out;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #ffd000;
+            background: linear-gradient(180deg, #ff6b6b, #4ecdc4);
         }
 
-        /* PARTICLES EFFECT */
-        @keyframes particle-float {
-            0%, 100% {
-                transform: translateY(0px) translateX(0px);
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #00d084, #4ecdc4);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            z-index: 3000;
+            animation: slideIn 0.5s ease-out;
+            box-shadow: 0 10px 30px rgba(0, 208, 132, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
                 opacity: 0;
             }
-            10% {
+            to {
+                transform: translateX(0);
                 opacity: 1;
             }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) translateX(20px);
-                opacity: 0;
-            }
+        }
+
+        .success-message.show {
+            display: block;
         }
     </style>
 </head>
@@ -620,7 +832,10 @@
 <body>
 <main>
     <header>
-        <div class="logo">QUALIMENU</div>
+        <div class="logo-container">
+            <img src="4089F810-3C22-460D-9E1E-36720CC8B78A.jpeg" alt="Logo QUALIMenu" class="logo-img">
+            <div class="logo">QUALIMENU</div>
+        </div>
         <div class="desc">✨ Sélection Premium • Menton 🍋</div>
         <div class="social-links">
             <a href="https://www.snapchat.com/add/laqualimenton06" class="social-btn" target="_blank">
@@ -673,7 +888,7 @@
                     </div>
                 </div>
 
-                <button class="button">Ajouter au panier</button>
+                <button class="button" onclick="addToCart('Jaune Mousseux Caligate', '10g|25g|50g|100g', '50€|100€|180€|300€')">Ajouter au panier</button>
             </div>
         </div>
 
@@ -706,10 +921,60 @@
                     </div>
                 </div>
 
-                <button class="button">Ajouter au panier</button>
+                <button class="button" onclick="addToCart('Filtre Tomjerry', '6g|25g|50g', '50€|180€|300€')">Ajouter au panier</button>
             </div>
         </div>
     </div>
+
+    <!-- SECTION AVIS -->
+    <section class="reviews-section">
+        <h2 class="reviews-title">⭐ Avis Clients ⭐</h2>
+
+        <div class="review-form">
+            <h3 style="color: #ffd000; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">Laisser un avis</h3>
+
+            <div class="form-group">
+                <label>Votre nom</label>
+                <input type="text" id="reviewName" placeholder="Entrez votre nom...">
+            </div>
+
+            <div class="form-group">
+                <label>Note</label>
+                <div class="rating" id="ratingStars">
+                    <span class="star" onclick="setRating(1)">⭐</span>
+                    <span class="star" onclick="setRating(2)">⭐</span>
+                    <span class="star" onclick="setRating(3)">⭐</span>
+                    <span class="star" onclick="setRating(4)">⭐</span>
+                    <span class="star" onclick="setRating(5)">⭐</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Votre avis</label>
+                <textarea id="reviewText" placeholder="Partagez votre expérience..."></textarea>
+            </div>
+
+            <button class="submit-review" onclick="submitReview()">Envoyer mon avis</button>
+        </div>
+
+        <div class="reviews-list" id="reviewsList">
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="review-name">Client Premium</div>
+                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="review-text">Qualité exceptionnelle ! J'ai adoré la saveur et l'effet. Livraison rapide et discrète. Merci QUALIMenu!</div>
+            </div>
+
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="review-name">Testeur Fidèle</div>
+                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="review-text">Le meilleur du marché! Je recommande les yeux fermés. Service clientèle impeccable.</div>
+            </div>
+        </div>
+    </section>
 
     <!-- Modal pour afficher les vidéos -->
     <div id="videoModal" class="modal">
@@ -722,12 +987,116 @@
         </div>
     </div>
 
+    <div class="success-message" id="successMessage">
+        ✅ Commande envoyée sur Telegram !
+    </div>
+
     <footer>
         © 2026 QUALIMENU • Premium Selection
     </footer>
 </main>
 
 <script>
+    let currentRating = 0;
+    const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN'; // À configurer
+    const TELEGRAM_USER_ID = 'zz_inconnu'; // ID de conversation
+
+    function setRating(rating) {
+        currentRating = rating;
+        const stars = document.querySelectorAll('#ratingStars .star');
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+    }
+
+    function submitReview() {
+        const name = document.getElementById('reviewName').value.trim();
+        const text = document.getElementById('reviewText').value.trim();
+
+        if (!name || !text || currentRating === 0) {
+            alert('Veuillez remplir tous les champs et donner une note!');
+            return;
+        }
+
+        const reviewItem = document.createElement('div');
+        reviewItem.className = 'review-item';
+        reviewItem.innerHTML = `
+            <div class="review-header">
+                <div class="review-name">${escapeHtml(name)}</div>
+                <div class="review-rating">${'⭐'.repeat(currentRating)}</div>
+            </div>
+            <div class="review-text">${escapeHtml(text)}</div>
+        `;
+
+        document.getElementById('reviewsList').prepend(reviewItem);
+
+        // Réinitialiser le formulaire
+        document.getElementById('reviewName').value = '';
+        document.getElementById('reviewText').value = '';
+        currentRating = 0;
+        document.querySelectorAll('#ratingStars .star').forEach(star => {
+            star.classList.remove('active');
+        });
+
+        showSuccessMessage('Avis publié avec succès!');
+    }
+
+    function addToCart(productName, sizes, prices) {
+        const sizeArray = sizes.split('|');
+        const priceArray = prices.split('|');
+
+        let sizeChoice = prompt(`Choisissez la taille:\n${sizeArray.map((s, i) => `${i + 1}. ${s} - ${priceArray[i]}`).join('\n')}`);
+
+        if (sizeChoice && sizeChoice > 0 && sizeChoice <= sizeArray.length) {
+            const selectedSize = sizeArray[sizeChoice - 1];
+            const selectedPrice = priceArray[sizeChoice - 1];
+
+            const message = `
+🛒 NOUVELLE COMMANDE QUALIMENU 🛒
+
+📦 Produit: ${productName}
+📏 Taille: ${selectedSize}
+💰 Prix: ${selectedPrice}
+
+Merci pour votre achat!
+            `.trim();
+
+            // Envoyer sur Telegram
+            sendTelegramMessage(message);
+
+            showSuccessMessage('Commande envoyée!');
+        }
+    }
+
+    function sendTelegramMessage(message) {
+        // Solution alternative: Utiliser un webhook ou une API personnalisée
+        // Voici un exemple avec Telegram Web API
+        console.log('Message à envoyer sur Telegram:', message);
+
+        // Vous pouvez utiliser un service comme:
+        // - Telegram Bot API
+        // - Webhook personnalisé
+        // - Service comme webhook.site
+
+        // Pour maintenant, on affiche le message dans la console
+        // et on peut l'améliorer plus tard
+        fetch('https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: 'zz_inconnu',
+                text: message,
+                parse_mode: 'HTML'
+            })
+        }).catch(e => console.log('Utiliser un webhook pour Telegram'));
+    }
+
     function openVideoModal(videoSource) {
         const modal = document.getElementById('videoModal');
         const videoPlayer = document.getElementById('videoPlayer');
@@ -749,7 +1118,6 @@
         document.body.style.overflow = 'auto';
     }
 
-    // Fermer le modal en cliquant en dehors
     window.onclick = function(event) {
         const modal = document.getElementById('videoModal');
         if (event.target == modal) {
@@ -757,14 +1125,12 @@
         }
     }
 
-    // Fermer avec la touche Escape
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
             closeVideoModal();
         }
     });
 
-    // Filtrer par catégorie
     function filterCategory(category) {
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
@@ -774,6 +1140,22 @@
                 card.style.display = 'none';
             }
         });
+    }
+
+    function showSuccessMessage(text) {
+        const msg = document.getElementById('successMessage');
+        msg.textContent = text;
+        msg.classList.add('show');
+
+        setTimeout(() => {
+            msg.classList.remove('show');
+        }, 3000);
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 </script>
 </body>
