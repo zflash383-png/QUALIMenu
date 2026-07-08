@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAQUALIMENTON</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#070707;
+    color:white;
+}
+
+header{
+    text-align:center;
+    padding:35px 20px;
+    background:linear-gradient(145deg,#111,#000);
+}
+
+.logo{
+    font-size:34px;
+    font-weight:900;
+    color:#ffd000;
+    letter-spacing:3px;
+}
+
+.desc{
+    margin-top:10px;
+    color:#aaa;
+}
+
+.categories{
+    display:flex;
+    gap:12px;
+    padding:20px;
+    overflow:auto;
+}
+
+.categories button{
+    background:#171717;
+    color:#ffd000;
+    border:1px solid #ffd000;
+    border-radius:30px;
+    padding:12px 20px;
+    white-space:nowrap;
+}
+
+.container{
+    padding:20px;
+    display:grid;
+    gap:20px;
+}
+
+.card{
+    background:#111;
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid #222;
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.info{
+    padding:20px;
+}
+
+.info h2{
+    color:#ffd000;
+    margin-bottom:10px;
+}
+
+.info p{
+    color:#aaa;
+}
+
+.button{
+    margin-top:15px;
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:15px;
+    background:#ffd000;
+    font-weight:bold;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#666;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<header>
+<div class="logo">LAQUALIMENTON</div>
+<div class="desc">Sélection premium • Menton 🍋</div>
+</header>
+
+
+<div class="categories">
+<button>Collection</button>
+<button>Nouveautés</button>
+<button>Sélection</button>
+</div>
+
+
+<div class="container">
+
+
+<div class="card">
+<img src="photo1.jpg">
+
+<div class="info">
+<h2>Produit 1</h2>
+<p>Description du produit</p>
+<button class="button">Voir détails</button>
+</div>
+
+</div>
+
+
+
+<div class="card">
+<img src="photo2.jpg">
+
+<div class="info">
+<h2>Produit 2</h2>
+<p>Description du produit</p>
+<button class="button">Voir détails</button>
+</div>
+
+</div>
+
+
+</div>
+
+
+<footer>
+© 2026 LAQUALIMENTON
+</footer>
+
+
+</body>
+</html>
